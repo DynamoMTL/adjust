@@ -1,5 +1,6 @@
-require "adjust/version"
+require 'adjust/version'
 
 module Adjust
-  # Your code goes here...
+  autoload :Clients, 'adjust/clients'
+  autoload :Representers, 'adjust/representers'
 end

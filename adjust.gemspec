@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Adjust::VERSION
   spec.authors       = ['Hugo Bastien']
   spec.email         = ['hugobast@gmail.com']
-  spec.summary       = %q{}
-  spec.description   = %q{}
-  spec.homepage      = ''
+  spec.summary       = 'A Ruby Adjust.com API Wrapper'
+  spec.description   = 'A Ruby Adjust.com API Wrapper'
+  spec.homepage      = 'https://github.com/DynamoMTL/adjust'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,6 +18,13 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', "~> 1.6"
+  spec.add_dependency 'faraday'
+  spec.add_dependency 'roar'
+
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'dotenv'
+  spec.add_development_dependency 'webmock'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'bundler', '~> 1.6'
   spec.add_development_dependency 'rake'
 end

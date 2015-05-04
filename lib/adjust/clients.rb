@@ -1,0 +1,1 @@
+require 'adjust/clients/event'
