@@ -3,12 +3,16 @@ require 'spec_helper'
 module Adjust
   module Clients
     describe Event do
+      let(:idfa) { ENV['ADJUST_TEST_IDFA'] }
+      let(:app_token) { ENV['ADJUST_APP_TOKEN'] }
+
       subject(:event) do
         Event.new(
-          app_token: :app_token,
-          event_token: :event_token,
-          created_at: :timestamp,
-          idfa: :idfa
+          idfa: idfa,
+          app_token: app_token,
+          event_token: 'tawmb9',
+          created_at: '2015-05-05T19:43:35-04:00',
+          environment: :sandbox
         )
       end
 
@@ -16,19 +20,17 @@ module Adjust
         expect(event.s2s).to be 1
       end
 
-      context 'response' do
+      context 'response', vcr: { cassette_name: :event_success } do
         subject!(:response) do
-          event.post \
-            uri: 'https://s2s.adjust.com/event',
-            as: 'application/json'
+          event.post uri: 'https://s2s.adjust.com/event'
         end
 
-        it 'acts as an http client' do
+        it 'makes a post request to adjust' do
           expect(post_request).to have_been_made
         end
 
         it 'updates event with response tracker token' do
-          expect(response.tracker_token).to eq 'tracker_token'
+          expect(response).to be_success
         end
 
         def post_request

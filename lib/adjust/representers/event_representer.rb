@@ -12,12 +12,14 @@ module Adjust
       property :created_at
       property :idfa
       property :s2s
+      property :environment
 
       # Response Properties
-      property :tracker_token
-      property :tracker_name
-      property :network
-      property :country
+      property :status
+
+      def success?
+        status == 'OK'
+      end
     end
   end
 end

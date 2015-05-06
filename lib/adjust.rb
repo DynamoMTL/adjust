@@ -1,4 +1,5 @@
 require 'adjust/version'
+require 'adjust/transport/faraday'
 
 module Adjust
   autoload :Clients, 'adjust/clients'
