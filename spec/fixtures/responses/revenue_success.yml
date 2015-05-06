@@ -5,7 +5,7 @@ http_interactions:
     uri: https://s2s.adjust.com/revenue
     body:
       encoding: UTF-8
-      string: app_token=<ADJUST_APP_TOKEN>&created_at=2015-05-05T23%3A27%3A28-04%3A00&currency=CAD&environment=sandbox&event_token=tawmb9&idfa=<ADJUST_TEST_IDFA>&revenue=2.0&s2s=1
+      string: app_token=<ADJUST_APP_TOKEN>&created_at=2015-05-06T04%3A11%3A32Z&currency=CAD&environment=sandbox&event_token=fbv8to&idfa=<ADJUST_TEST_IDFA>&revenue=2.0&s2s=1
     headers:
       User-Agent:
       - Faraday v0.9.1
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 06 May 2015 03:27:28 GMT
+      - Wed, 06 May 2015 04:11:32 GMT
       Content-Length:
       - '15'
       Content-Type:
@@ -30,5 +30,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"status":"OK"}'
     http_version: 
-  recorded_at: Wed, 06 May 2015 03:27:28 GMT
+  recorded_at: Wed, 06 May 2015 04:11:32 GMT
 recorded_with: VCR 2.9.3

@@ -32,7 +32,7 @@ module Adjust
     def current_time
       return Time.zone.now.iso8601 if Time.respond_to? :zone
 
-      Time.now.iso8601
+      Time.now.utc.iso8601
     end
   end
 end
