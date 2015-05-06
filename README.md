@@ -1,4 +1,4 @@
-# Adjust
+# Adjust [![Build Status](https://travis-ci.org/DynamoMTL/adjust.svg?branch=master)](https://travis-ci.org/DynamoMTL/adjust)
 
 This gem is meant for use with server to server integration with Adjust. More information can be found here: [Server-side event tracking](https://docs.adjust.com/en/event-tracking/#reference-server-side-event-tracking)
 
