@@ -11,7 +11,7 @@ module Adjust
           idfa: idfa,
           app_token: app_token,
           event_token: 'tawmb9',
-          created_at: '2015-05-05T19:43:35-04:00',
+          created_at: Time.now.iso8601,
           environment: :sandbox
         )
       end

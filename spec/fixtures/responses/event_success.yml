@@ -30,5 +30,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"status":"OK"}'
     http_version: 
-  recorded_at: Tue, 05 May 2015 23:43:36 GMT
+  recorded_at: Tue, 05 May 2015 23:43:35 GMT
 recorded_with: VCR 2.9.3
