@@ -10,9 +10,12 @@ module Adjust
       property :app_token
       property :event_token
       property :created_at
-      property :idfa
       property :s2s
       property :environment
+
+      # Device IDs
+      property :idfa
+      property :gps_adid
 
       # Optional Revenue Properties
       property :revenue
