@@ -7,13 +7,7 @@ module Adjust
   autoload :Representers, 'adjust/representers'
 
   class << self
-    def configure
-      yield configuration
-    end
-
-    def configuration
-      @configuration ||= Core::Configuration.new
-    end
+    include Core::Configurable
 
     def event(token:, time: current_time, **device)
       Clients::Event.new \
@@ -22,16 +16,6 @@ module Adjust
         environment: environment,
         created_at: time,
         **device
-    end
-
-    private
-
-    def app_token
-      configuration.app_token
-    end
-
-    def environment
-      configuration.environment
     end
 
     def current_time

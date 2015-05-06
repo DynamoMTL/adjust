@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module Adjust
   module Core
     class Configuration
