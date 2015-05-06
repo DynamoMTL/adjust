@@ -16,5 +16,3 @@ module Adjust
     end
   end
 end
-
-Roar::HttpVerbs.transport_engine = Adjust::Transport::Faraday
