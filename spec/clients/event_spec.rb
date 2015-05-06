@@ -20,17 +20,17 @@ module Adjust
         expect(event.s2s).to be 1
       end
 
-      context 'response', vcr: { cassette_name: :event_success } do
-        subject!(:response) do
-          event.post uri: 'https://s2s.adjust.com/event'
-        end
+      describe '#track!', vcr: { cassette_name: :event_success } do
+        subject(:track!) { event.track! }
 
         it 'makes a post request to adjust' do
+          track!
+
           expect(post_request).to have_been_made
         end
 
         it 'updates event with response tracker token' do
-          expect(response).to be_success
+          expect(track!).to be_success
         end
 
         def post_request
