@@ -18,6 +18,17 @@ module Adjust
         **device
     end
 
+    def revenue(token:, revenue:, currency:, time: current_time, **device)
+      Clients::Revenue.new \
+        event_token: token,
+        app_token: app_token,
+        environment: environment,
+        created_at: time,
+        revenue: revenue,
+        currency: currency,
+        **device
+    end
+
     def current_time
       return Time.zone.now.iso8601 if Time.respond_to? :zone
 
