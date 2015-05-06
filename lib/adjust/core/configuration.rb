@@ -8,7 +8,7 @@ module Adjust
       end
 
       def app_token
-        raise MissingAppTokenError unless @app_token
+        fail MissingAppTokenError unless @app_token
 
         @app_token
       end
