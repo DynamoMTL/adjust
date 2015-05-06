@@ -5,7 +5,7 @@ require 'bundler/setup'
 require 'webmock/rspec'
 
 Bundler.setup
-Dotenv.load!
+Dotenv.load
 
 require 'adjust'
 require 'support/vcr'
