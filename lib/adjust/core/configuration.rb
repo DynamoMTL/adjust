@@ -3,23 +3,48 @@ require 'forwardable'
 module Adjust
   module Core
     class Configuration
-      attr_accessor :app_token, :environment
+      def load(path, environment: default_environment)
+        @configurations = read_configurations path
+
+        @environment = environment
+      end
 
       def environment
-        @environment ||= :sandbox
+        @environment ||= default_environment
       end
 
-      def app_token
-        fail MissingAppTokenError unless @app_token
-
-        @app_token
+      def configurations
+        @configurations ||= read_configurations
       end
 
-      def to_hash
-        {
-          environment: environment,
-          app_token: app_token
-        }
+      def active
+        configurations[environment]
+      end
+
+      def active_environment
+        active['environment']
+      end
+
+      def tokens(app, event)
+        Tokens.new(app, event, active[app]).find
+      end
+
+      private
+
+      def default_environment
+        ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development'
+      end
+
+      def read_configurations(path = 'config/adjust.yml')
+        YAML.load parse read path
+      end
+
+      def read(path)
+        File.read path
+      end
+
+      def parse(file)
+        ERB.new(file).result
       end
     end
   end

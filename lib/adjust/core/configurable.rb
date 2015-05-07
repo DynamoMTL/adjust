@@ -1,10 +1,8 @@
 module Adjust
   module Core
     module Configurable
-      extend Forwardable
-
-      def configure
-        yield configuration
+      def load(path = 'config/adjust.yml', environment: nil)
+        configuration.load path, environment: environment
       end
 
       def configuration
@@ -13,7 +11,13 @@ module Adjust
 
       private
 
-      def_delegators :configuration, :app_token, :environment
+      def environment
+        configuration.active_environment
+      end
+
+      def tokens(app, event)
+        configuration.tokens(app, event)
+      end
     end
   end
 end

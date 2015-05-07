@@ -3,37 +3,96 @@ require 'spec_helper'
 module Adjust
   module Core
     describe Configuration do
-      context '#environment' do
-        it 'defaults to sandbox' do
-          expect(subject.environment).to eq :sandbox
+      let(:path) { 'spec/fixtures/config/adjust.yml' }
+      subject(:config) { Configuration.new }
+
+      context 'with an explicit environment' do
+        subject(:load!) { config.load(path, environment: 'test') }
+        before { expect { load! }.to_not raise_error }
+
+        describe '#load' do
+          it 'sets an environment' do
+            expect(config.environment).to eq 'test'
+          end
         end
 
-        it 'can be overriden' do
-          subject.environment = :production
+        describe '#configurations' do
+          it 'caches the configurations' do
+            expect(config.configurations).to include 'test'
+          end
+        end
 
-          expect(subject.environment).to eq :production
+        describe '#active' do
+          it 'contains the configuration for current env' do
+            expect(config.active).to include 'test_app'
+          end
+        end
+
+        describe '#active_environment' do
+          it 'returns the adjust environment for current env' do
+            expect(config.active_environment).to eq 'sandbox'
+          end
+        end
+
+        describe '#active_tokens' do
+          it 'returns arguments if app was not matched' do
+            expect(config.tokens('foo', 'bar')).to eq \
+              app_token: 'foo',
+              event_token: 'bar'
+          end
+
+          it 'returns app_token if app matched and event not matched' do
+            expect(config.tokens('test_app', 'bar')).to eq \
+              app_token: 'app_token',
+              event_token: 'bar'
+          end
+
+          it 'returns tokens if app matched and event matched' do
+            expect(config.tokens('test_app', 'event1')).to eq \
+              app_token: 'app_token',
+              event_token: 'event_token'
+          end
         end
       end
 
-      context '#app_token' do
-        it 'raises an exception if not set' do
-          expect { subject.app_token }.to raise_error(MissingAppTokenError)
+      context 'with an implicit environment' do
+        subject(:load!) { config.load(path) }
+
+        describe '#environment' do
+          after do
+            ENV.delete('RACK_ENV')
+            ENV.delete('RAILS_ENV')
+          end
+
+          it 'defaults to development' do
+            load!
+
+            expect(config.environment).to eq 'development'
+          end
+
+          it 'defaults to rack env if defined' do
+            ENV['RACK_ENV'] = 'staging'
+
+            load!
+
+            expect(config.environment).to eq 'staging'
+          end
+
+          it 'defaults to rails env if defined' do
+            ENV['RAILS_ENV'] = 'production'
+
+            load!
+
+            expect(config.environment).to eq 'production'
+          end
         end
 
-        it 'can be set' do
-          subject.app_token = :app_token
+        describe '#active' do
+          it 'loads the development configs' do
+            load!
 
-          expect(subject.app_token).to eq :app_token
-        end
-      end
-
-      context '#to_hash' do
-        before { subject.app_token = :app_token }
-
-        it 'returns configs as a hash' do
-          expect(subject.to_hash).to eq \
-            environment: :sandbox,
-            app_token: :app_token
+            expect(config.active).to include 'dev_app'
+          end
         end
       end
     end

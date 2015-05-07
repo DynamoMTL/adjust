@@ -1,0 +1,33 @@
+development:
+  environment: 'sandbox'
+
+  dev_app:
+    app_token: 'app_token'
+    event1:
+      event_token: 'event_token'
+
+test:
+  environment: 'sandbox'
+
+  test_app:
+    app_token: 'app_token'
+    event1:
+      event_token: 'event_token'
+
+integration:
+  environment: 'sandbox'
+
+  test_app:
+    app_token: <%= ENV['ADJUST_APP_TOKEN'] %>
+    event1:
+      event_token: 'tawmb9'
+    event2:
+      event_token: 'fbv8to'
+
+production:
+  environment: 'production'
+
+  prod_app:
+    app_token: 'app_token'
+    event1:
+      event_token: 'event_token'

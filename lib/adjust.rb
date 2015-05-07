@@ -9,24 +9,22 @@ module Adjust
   class << self
     include Core::Configurable
 
-    def event(token:, time: current_time, **device)
-      Clients::Event.new \
-        event_token: token,
-        app_token: app_token,
+    def event(app:, event:, time: current_time, **device)
+      Clients::Event.new(
+        **tokens(app, event),
         environment: environment,
         created_at: time,
-        **device
+        **device)
     end
 
-    def revenue(token:, revenue:, currency:, time: current_time, **device)
-      Clients::Revenue.new \
-        event_token: token,
-        app_token: app_token,
+    def revenue(app:, event:, revenue:, currency:, time: current_time, **device)
+      Clients::Revenue.new(
+        **tokens(app, event),
         environment: environment,
         created_at: time,
         revenue: revenue,
         currency: currency,
-        **device
+        **device)
     end
 
     def current_time
