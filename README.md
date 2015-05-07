@@ -20,11 +20,37 @@ This gem is meant for use with server to server integration with Adjust. More in
 
 ##### Configuration
 
+By default the configurations will be read from `config/adjust.yml`. Also of note the environment loaded will be that of RACK_ENV, RAILS_ENV or as a last resort default of 'development'.
+
+Example config:
+```yaml
+development:
+  environment: sandbox
+  dev_app:
+    app_token: app_token
+    event1:
+      event_token: event_token
+```
+
+We would then be able to refer to the token using the key given in the config:
+
 ```ruby
-Adjust.configure do |config|
-  config.app_token = '<YOUR_ADJUST_APP_TOKEN>'
-  config.environment = '<production|sandbox>'
-end
+Adjust.event(app: :dev_app, event: :event1, idfa: :idfa).track!
+```
+
+Or by their tokens
+
+```ruby
+Adjust.event(app: :app_token, event: :event_token, idfa: :idfa).track!
+```
+
+Loading the configurations
+
+```ruby
+Adjust.load(environment: 'test') # => {...}
+Adjust.load('path/to/adjust.yml')  # => {...}
+Adjust.load('path/to/adjust.yml', environment: 'staging') # => {...}
+
 ```
 
 ##### Event tracking
@@ -32,7 +58,7 @@ end
 *`idfa` can also be any other values such as `android_id` or `gps_adid` check Adjust's documentation for details.*
 
 ```ruby
-Adjust.event(token: :token, idfa: :idfa).track!
+Adjust.event(app: :app, event: :event, idfa: :idfa).track!
 ```
 
 
@@ -41,7 +67,7 @@ Adjust.event(token: :token, idfa: :idfa).track!
 *`idfa` can also be any other values such as `android_id` or `gps_adid` check Adjust's documentation for details.*
 
 ```ruby
-Adjust.revenue(token: :token, revenue: 1.25, currency: 'USD|CAD|EUR', idfa: :idfa).track!
+Adjust.revenue(app: :app, event: :event, revenue: 1.25, currency: 'USD|CAD|EUR', idfa: :idfa).track!
 ```
 
 ## Contributing
