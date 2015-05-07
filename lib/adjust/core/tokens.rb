@@ -2,9 +2,9 @@ module Adjust
   module Core
     class Tokens
       def initialize(app, event, config)
-        @app = app
-        @event = event
-        @config = config
+        @app = app.to_s
+        @event = event.to_s
+        @config = config[@app]
       end
 
       def find

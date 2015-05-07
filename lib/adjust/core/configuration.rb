@@ -26,7 +26,7 @@ module Adjust
       end
 
       def tokens(app, event)
-        Tokens.new(app, event, active[app]).find
+        Tokens.new(app, event, active).find
       end
 
       private
