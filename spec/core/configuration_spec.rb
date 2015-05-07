@@ -54,47 +54,6 @@ module Adjust
           end
         end
       end
-
-      context 'with an implicit environment' do
-        subject(:load!) { config.load(path) }
-
-        describe '#environment' do
-          after do
-            ENV.delete('RACK_ENV')
-            ENV.delete('RAILS_ENV')
-          end
-
-          it 'defaults to development' do
-            load!
-
-            expect(config.environment).to eq 'development'
-          end
-
-          it 'defaults to rack env if defined' do
-            ENV['RACK_ENV'] = 'staging'
-
-            load!
-
-            expect(config.environment).to eq 'staging'
-          end
-
-          it 'defaults to rails env if defined' do
-            ENV['RAILS_ENV'] = 'production'
-
-            load!
-
-            expect(config.environment).to eq 'production'
-          end
-        end
-
-        describe '#active' do
-          it 'loads the development configs' do
-            load!
-
-            expect(config.active).to include 'dev_app'
-          end
-        end
-      end
     end
   end
 end
