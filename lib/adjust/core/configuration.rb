@@ -1,12 +1,12 @@
-require 'forwardable'
+require 'yaml'
+require 'erb'
 
 module Adjust
   module Core
     class Configuration
-      def load(path, environment: default_environment)
+      def load(path, environment: nil)
+        @environment = environment || default_environment
         @configurations = read_configurations path
-
-        @environment = environment
       end
 
       def environment
