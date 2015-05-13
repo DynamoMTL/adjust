@@ -40,4 +40,8 @@ RSpec.configure do |config|
   config.after(:each) do
     Timecop.return
   end
+
+  def named(name)
+    { cassette_name: name }
+  end
 end

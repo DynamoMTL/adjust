@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://s2s.adjust.com/revenue
+    body:
+      encoding: UTF-8
+      string: app_token=<ADJUST_APP_TOKEN>&created_at=2015-05-13T14%3A28%3A41Z&currency=CAD&environment=sandbox&event_token=fbv8to&idfa=D2CADB5F-410F-4963-AC0C-2A78534BDF1E&revenue=2.0&s2s=1
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 13 May 2015 14:28:42 GMT
+      Content-Length:
+      - '138'
+    body:
+      encoding: UTF-8
+      string: |
+        {"error":"Event failed (Device not found, contact support@adjust.com) (app_token: <ADJUST_APP_TOKEN>, adid: dc4920c26bcc478fbdd2e5bfd0dbe551)"}
+    http_version: 
+  recorded_at: Wed, 13 May 2015 14:28:41 GMT
+recorded_with: VCR 2.9.3

@@ -1,10 +1,11 @@
+require 'faraday'
 require 'adjust/version'
-require 'adjust/transport/faraday'
 
 module Adjust
   autoload :Core, 'adjust/core'
   autoload :Clients, 'adjust/clients'
   autoload :Representers, 'adjust/representers'
+  autoload :Transport, 'adjust/transport'
 
   class << self
     include Core::Configurable
