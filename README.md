@@ -50,6 +50,9 @@ Loading the configurations
 Adjust.load(environment: 'test') # => {...}
 Adjust.load('path/to/adjust.yml')  # => {...}
 Adjust.load('path/to/adjust.yml', environment: 'staging') # => {...}
+Adjust.load(config: {...}) # => {...}
+Adjust.load(config: {...}, environment: 'staging') # => {...}
+Adjust.load(config: Rails.application.secrets.adjust) # => {...}
 
 ```
 

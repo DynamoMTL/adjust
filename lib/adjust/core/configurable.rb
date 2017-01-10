@@ -1,8 +1,8 @@
 module Adjust
   module Core
     module Configurable
-      def load(path = 'config/adjust.yml', environment: nil)
-        configuration.load path, environment: environment
+      def load(path = 'config/adjust.yml', config: nil, environment: nil)
+        configuration.load path, config: config, environment: environment
       end
 
       def configuration

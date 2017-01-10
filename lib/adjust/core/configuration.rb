@@ -4,9 +4,9 @@ require 'erb'
 module Adjust
   module Core
     class Configuration
-      def load(path, environment: nil)
+      def load(path, config: nil, environment: nil)
         @environment = environment || default_environment
-        @configurations = read_configurations path
+        @configurations = config || read_configurations(path)
       end
 
       def environment
