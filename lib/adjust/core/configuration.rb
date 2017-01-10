@@ -18,7 +18,7 @@ module Adjust
       end
 
       def active
-        configurations[environment]
+        configurations.fetch(environment, configurations)
       end
 
       def active_environment
