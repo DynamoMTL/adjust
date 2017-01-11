@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Sending an event' do
-  context 'with success', vcr: named(:event_success)  do
+  context 'with success', vcr: named(:event_success) do
     subject do
       Adjust.event \
         app: :test_app,

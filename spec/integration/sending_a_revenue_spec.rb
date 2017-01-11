@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Sending a revenue' do
-  context 'with success', vcr: named(:revenue_success)  do
+  context 'with success', vcr: named(:revenue_success) do
     subject do
       Adjust.revenue \
         app: :test_app,
