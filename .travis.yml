@@ -3,7 +3,6 @@ rvm:
   - 2.3.3
   - 2.2.5
   - ruby-head
-  - jruby
 
 notifications:
   email: false
