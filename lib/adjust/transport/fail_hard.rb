@@ -6,7 +6,7 @@ module Adjust
       SUCCESS_STATUSES = 200...300
 
       def on_complete(env)
-        fail Error, error_from_json(env[:body]) if failed?(env)
+        raise Error, error_from_json(env[:body]) if failed?(env)
       end
 
       def failed?(env)

@@ -1,11 +1,12 @@
-require 'dotenv'
 require 'json'
 require 'pry'
 require 'bundler/setup'
 require 'webmock/rspec'
 
 Bundler.setup
-Dotenv.load
+
+ENV['ADJUST_APP_TOKEN'] = 'app-token'
+ENV['ADJUST_TEST_IDFA'] = 'test-idfa'
 
 require 'adjust'
 require 'support/vcr'
